@@ -3,6 +3,7 @@ import plays from './data/plays.json' assert { type: "json" }; // assert not sup
 
 // app
 import { amountFor } from './helpers/amountFor.js';
+import { playFor } from './helpers/playFor.js';
 
 const statement = (invoice, plays) => {
     let totalAmount = 0;
@@ -15,7 +16,7 @@ const statement = (invoice, plays) => {
     }).format;
 
     for (let perf of invoice.performances) {
-        const play = plays[perf.playID];
+        const play = playFor(perf);
         let thisAmount = amountFor(perf, play);
 
         // add volume credits 
